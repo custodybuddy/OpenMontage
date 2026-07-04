@@ -12,7 +12,7 @@ of friction this removes; emitting a finished scene would reintroduce the
 template trap.
 
 Usage:
-    python scripts/scaffold_atelier_project.py <slug> [--composition-id CamelName]
+    python3 scripts/scaffold_atelier_project.py <slug> [--composition-id CamelName]
 
 Creates:
     projects/<slug>/

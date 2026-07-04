@@ -15,7 +15,7 @@ Skip this skill when the user arrives with a specific, actionable request like "
 Before saying anything creative, know what you're working with:
 
 ```bash
-python -c "
+python3 -c "
 from tools.tool_registry import registry
 import json
 registry.discover()

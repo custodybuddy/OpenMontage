@@ -39,7 +39,7 @@ If the approved brief or scene plan makes motion a hard requirement, verify that
 **Mandatory Remotion preflight (run before every render when the scene plan includes any Remotion scene type — title cards, stat cards, anime/hero_title, end-tag, overlays):**
 
 ```bash
-python -c "
+python3 -c "
 from tools.tool_registry import registry
 registry.discover()
 info = registry.get('video_compose').get_info()

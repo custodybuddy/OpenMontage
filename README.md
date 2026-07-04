@@ -120,6 +120,11 @@ Works with **Claude Code, Cursor, Copilot, Windsurf, Codex** — any AI coding a
 - **Node.js 18+** — [nodejs.org](https://nodejs.org/)
 - **An AI coding assistant** — Claude Code, Cursor, Copilot, Windsurf, or Codex
 
+**macOS Catalina (10.15):** use `python3`, not `python` — Catalina's system
+`python` is Python 2.7. The Catalina-friendly local stack is FFmpeg +
+Remotion with Node 18/20. HyperFrames is disabled on Catalina because its
+Node 22 + modern browser runtime is not supported there.
+
 ### Install & Run
 
 ```bash
@@ -157,8 +162,8 @@ This repo is built for agentic operation. If you're an OpenClaw-style agent, her
 3. **Check the actual capability envelope**
    Run:
    ```bash
-   python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.support_envelope(), indent=2))"
-   python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.provider_menu(), indent=2))"
+   python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.support_envelope(), indent=2))"
+   python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.provider_menu(), indent=2))"
    ```
 4. **Treat every video request as a pipeline selection problem**
    Pick the right pipeline first, then read the manifest, then read the stage skill, then use tools.

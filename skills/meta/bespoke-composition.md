@@ -166,7 +166,7 @@ Bespoke compositions are **throwaway and project-local** — they never enter an
 - Author under `projects/<slug>/` (gitignored). The render tool auto-stages your `.tsx`/`.ts`
   source into `remotion-composer/projects/<slug>/` via mtime-skip copy so webpack can resolve
   `node_modules` — your source-of-truth stays under `projects/`.
-- Scaffold with `python scripts/scaffold_atelier_project.py <slug>` — emits engine
+- Scaffold with `python3 scripts/scaffold_atelier_project.py <slug>` — emits engine
   plumbing only (entry / Root / blank `Composition.tsx` / `art-direction.md` / props
   template / README). Zero creative content; the placeholder is a deliberately ugly black
   screen so the post-render review correctly refuses to ship the scaffold unauthored.

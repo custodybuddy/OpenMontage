@@ -26,6 +26,17 @@ _AUDIO_EXTENSIONS = frozenset({".mp3", ".wav", ".aac", ".flac", ".ogg", ".m4a", 
 _IMAGE_EXTENSIONS = frozenset({".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tiff", ".svg"})
 
 
+def _has_review_evidence(entry: dict[str, Any]) -> bool:
+    """Whether the entry contains evidence that an actual review ran."""
+    return any(
+        (
+            entry.get("technical_probe"),
+            entry.get("representative_frames"),
+            entry.get("transcript_summary"),
+        )
+    )
+
+
 def detect_media_type(path: Path) -> Optional[str]:
     """Classify a file as video, audio, or image by extension."""
     ext = path.suffix.lower()
@@ -273,6 +284,10 @@ def review_source_media(
         transcript = _transcribe_if_available(file_path, media_type, tool_registry)
         if transcript:
             entry["transcript_summary"] = transcript
+
+        if not _has_review_evidence(entry):
+            logger.warning("Skipping %s: no successful review evidence collected", file_path)
+            continue
 
         # Build content summary
         probe = entry["technical_probe"]

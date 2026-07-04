@@ -45,7 +45,7 @@ For capability families with multiple providers (TTS, video generation), the arc
 **Do not maintain a hardcoded tool list.** The registry is the single source of truth. Query it at runtime:
 
 ```bash
-python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.capability_catalog(), indent=2))"
+python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.capability_catalog(), indent=2))"
 ```
 
 Key capability families to look for in the output:

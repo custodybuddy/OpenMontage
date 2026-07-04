@@ -10,6 +10,7 @@ from __future__ import annotations
 import colorsys
 import json
 import math
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Optional
 
@@ -25,6 +26,7 @@ SCHEMA_PATH = (
 )
 
 
+@lru_cache(maxsize=1)
 def _load_playbook_schema() -> dict:
     with open(SCHEMA_PATH) as f:
         return json.load(f)
@@ -61,11 +63,11 @@ def validate_playbook(playbook: dict) -> None:
 def list_playbooks(styles_dir: Optional[Path] = None) -> list[str]:
     """List all available playbook names."""
     styles_dir = styles_dir or STYLES_DIR
-    return [
+    return sorted(
         p.stem
         for p in styles_dir.glob("*.yaml")
         if p.stem != "__pycache__"
-    ]
+    )
 
 
 # ---------------------------------------------------------------------------

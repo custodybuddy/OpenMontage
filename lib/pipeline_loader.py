@@ -6,6 +6,7 @@ Loads and validates pipeline YAML manifests from pipeline_defs/.
 from __future__ import annotations
 
 import json
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Optional
 
@@ -21,6 +22,7 @@ SCHEMA_PATH = (
 )
 
 
+@lru_cache(maxsize=1)
 def _load_manifest_schema() -> dict:
     with open(SCHEMA_PATH) as f:
         return json.load(f)
@@ -53,7 +55,7 @@ def load_pipeline(name: str, defs_dir: Optional[Path] = None) -> dict[str, Any]:
 def list_pipelines(defs_dir: Optional[Path] = None) -> list[str]:
     """List all available pipeline manifest names."""
     defs_dir = defs_dir or PIPELINE_DEFS_DIR
-    return [p.stem for p in defs_dir.glob("*.yaml")]
+    return sorted(p.stem for p in defs_dir.glob("*.yaml"))
 
 
 def _condition_is_active(condition: Optional[str], context: Optional[dict[str, Any]]) -> bool:

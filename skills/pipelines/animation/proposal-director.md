@@ -95,13 +95,13 @@ to validate the animation style before full production.
 Before designing concepts, know what tools are available:
 
 ```bash
-python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.support_envelope(), indent=2))"
+python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.support_envelope(), indent=2))"
 ```
 
 Also check the capability catalog:
 
 ```bash
-python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.capability_catalog(), indent=2))"
+python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.capability_catalog(), indent=2))"
 ```
 
 **Animation-specific preflight checks:**

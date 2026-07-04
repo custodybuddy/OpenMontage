@@ -114,6 +114,11 @@ OpenMontage 可以从 **YouTube 视频、Short、Reel、TikTok 或本地片段**
 - **Node.js 18+** — [nodejs.org](https://nodejs.org/)
 - **一款 AI 编程助手** — Claude Code、Cursor、Copilot、Windsurf 或 Codex
 
+**macOS Catalina (10.15)：** 使用 `python3`，不要使用 `python`；Catalina
+系统自带的 `python` 是 Python 2.7。Catalina 上推荐使用 FFmpeg + Remotion
+作为本地合成栈。HyperFrames 在 Catalina 上会被禁用，因为它依赖 Node 22
+和较新的浏览器运行时。
+
 ### 安装与运行
 
 ```bash
@@ -151,8 +156,8 @@ make setup
 3. **检查实际的能力范围**
    运行：
    ```bash
-   python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.support_envelope(), indent=2))"
-   python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.provider_menu(), indent=2))"
+   python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.support_envelope(), indent=2))"
+   python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.provider_menu(), indent=2))"
    ```
 4. **将每个视频请求视为一个流水线选择问题**
    首先选择正确的流水线，然后阅读清单（manifest），接着阅读阶段技能（stage skill），最后再使用工具。

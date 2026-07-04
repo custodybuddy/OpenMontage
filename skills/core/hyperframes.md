@@ -223,6 +223,10 @@ Floor requirements (all must hold for `runtime_available: true`):
 - `npx` on PATH (bundled with Node.js)
 - `npx hyperframes doctor` exits 0, OR a lightweight equivalent check passes
 
+macOS Catalina (10.15) and older are treated as unsupported for HyperFrames.
+On those hosts, preflight should report HyperFrames unavailable and recommend
+Remotion or FFmpeg for local composition.
+
 `bun` is NOT required — HyperFrames is consumable via `npx hyperframes` (published npm package name is `hyperframes`; the monorepo-internal `@hyperframes/cli` name is NOT on the public npm registry and returns 404).
 
 When `runtime_available: false`, preflight must surface the reason and the

@@ -57,6 +57,19 @@ def _font(typo: dict[str, Any], key: str, default: str) -> str:
     return default
 
 
+def _font_with_aliases(
+    typo: dict[str, Any],
+    *keys: str,
+    default: str,
+) -> str:
+    """Extract a font family string, tolerating historical key variants."""
+    for key in keys:
+        value = _font(typo, key, "")
+        if value:
+            return value
+    return default
+
+
 def _motion_easing(motion: dict[str, Any]) -> tuple[str, str]:
     """Derive (duration, ease) from the playbook motion block."""
     pace = (motion.get("pace") or "moderate").lower()
@@ -102,7 +115,10 @@ def style_bridge(
         primary = _first(palette.get("primary"), css["--color-primary"])
         secondary = _first(palette.get("secondary"), css["--color-secondary"])
         surface = _first(palette.get("surface"), css["--color-surface"])
-        muted = _first(palette.get("muted_text"), css["--color-muted"])
+        muted = _first(
+            palette.get("muted") or palette.get("muted_text"),
+            css["--color-muted"],
+        )
 
         duration, ease = _motion_easing(motion)
 
@@ -115,7 +131,12 @@ def style_bridge(
                 "--color-secondary": secondary,
                 "--color-surface": surface,
                 "--color-muted": muted,
-                "--font-heading": _font(typo, "heading", css["--font-heading"]),
+                "--font-heading": _font_with_aliases(
+                    typo,
+                    "headings",
+                    "heading",
+                    default=css["--font-heading"],
+                ),
                 "--font-body": _font(typo, "body", css["--font-body"]),
                 "--font-mono": _font(typo, "code", css["--font-mono"]),
                 "--ease-primary": ease,

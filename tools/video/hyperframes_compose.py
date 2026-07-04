@@ -24,6 +24,10 @@ import time
 from pathlib import Path
 from typing import Any, Optional
 
+from lib.platform_compat import (
+    is_macos_catalina_or_older,
+    macos_display_name,
+)
 from tools.base_tool import (
     BaseTool,
     Determinism,
@@ -66,7 +70,9 @@ class HyperFramesCompose(BaseTool):
         "Note: the upstream monorepo develops the package as `@hyperframes/cli`, "
         "but it publishes to npm as `hyperframes`. `npx @hyperframes/cli` "
         "returns 404 -- do NOT use that form. Verify setup with "
-        "`npx hyperframes doctor` or run the `doctor` operation on this tool."
+        "`npx hyperframes doctor` or run the `doctor` operation on this tool. "
+        "On macOS Catalina (10.15) and older, use Remotion or FFmpeg instead; "
+        "the HyperFrames Node 22 + modern browser runtime is treated as unsupported."
     )
     agent_skills = [
         "hyperframes",
@@ -314,6 +320,11 @@ class HyperFramesCompose(BaseTool):
         npx_ok = shutil.which("npx") is not None
 
         reasons: list[str] = []
+        if is_macos_catalina_or_older():
+            reasons.append(
+                f"{macos_display_name()} is below the supported HyperFrames "
+                "runtime floor; use Remotion or FFmpeg on Catalina"
+            )
         if node_major is None:
             reasons.append("node not found on PATH")
         elif node_major < self._NODE_FLOOR_MAJOR:
@@ -903,7 +914,12 @@ class HyperFramesCompose(BaseTool):
         fg = _first(palette.get("text"), "#F5F5F5")
         accent = _first(palette.get("accent"), "#F59E0B")
         primary = _first(palette.get("primary"), "#2563EB")
-        heading = typo.get("heading", {}).get("font") or typo.get("heading", {}).get("family") or "Inter"
+        heading_node = typo.get("headings") or typo.get("heading") or {}
+        heading = (
+            heading_node.get("font")
+            or heading_node.get("family")
+            or "Inter"
+        )
         body = typo.get("body", {}).get("font") or typo.get("body", {}).get("family") or "Inter"
 
         css_vars = {

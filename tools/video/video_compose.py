@@ -1039,7 +1039,13 @@ class VideoCompose(BaseTool):
             bg = palette.get("background", "#FFFFFF")
             text = palette.get("text", "#1F2937")
             surface = palette.get("surface", bg)
-            muted = palette.get("muted_text", "#6B7280")
+            muted = palette.get("muted", palette.get("muted_text", "#6B7280"))
+
+            heading_typography = (
+                typo.get("headings")
+                if isinstance(typo.get("headings"), dict)
+                else typo.get("heading", {})
+            )
 
             # Build chart colors from all palette entries
             chart_colors = []
@@ -1057,7 +1063,7 @@ class VideoCompose(BaseTool):
                 "surfaceColor": surface,
                 "textColor": text,
                 "mutedTextColor": muted,
-                "headingFont": typo.get("heading", {}).get("font", "Inter"),
+                "headingFont": heading_typography.get("font", "Inter"),
                 "bodyFont": typo.get("body", {}).get("font", "Inter"),
                 "monoFont": typo.get("code", {}).get("font", "JetBrains Mono"),
                 "chartColors": chart_colors[:6],

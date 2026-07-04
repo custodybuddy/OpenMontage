@@ -87,7 +87,7 @@ Read the `research_brief` thoroughly. Extract:
 Before designing concepts, know what tools are available:
 
 ```bash
-python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.support_envelope(), indent=2))"
+python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.support_envelope(), indent=2))"
 ```
 
 Record:

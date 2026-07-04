@@ -252,7 +252,7 @@ If the folder has tracks, the proposal and asset stages should present them as o
 Do this before any creative work. **Use `provider_menu_summary()` first — it's the human-ready rollup.** The raw `support_envelope()` dump is a firehose (megabytes of JSON on a well-configured machine); pasting it into chat will bury the user.
 
 ```bash
-python -c "
+python3 -c "
 from tools.tool_registry import registry
 import json
 registry.discover()
@@ -271,10 +271,10 @@ Then, for deeper inspection (only when the summary isn't enough):
 
 ```bash
 # Full menu — grouped available/unavailable per capability.
-python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.provider_menu(), indent=2))"
+python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.provider_menu(), indent=2))"
 
 # Raw envelope — every tool's full contract. Slow/firehose; use for debugging only.
-python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.support_envelope(), indent=2))"
+python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.support_envelope(), indent=2))"
 ```
 
 Then:
@@ -357,7 +357,7 @@ When tools are `UNAVAILABLE` but can be fixed with simple configuration, **offer
 `video_compose` has **three** render engines / runtimes. They are parallel, not ranked — the choice is made at proposal and locked in `edit_decisions.render_runtime`. Check which are available:
 
 ```bash
-python -c "
+python3 -c "
 from tools.tool_registry import registry
 registry.discover()
 info = registry._tools['video_compose'].get_info()
@@ -372,6 +372,11 @@ print('HyperFrames note:', info.get('hyperframes_note'))
 | **FFmpeg** | Video-only cuts, concat, trim, subtitle burn | `ffmpeg` binary (always available) |
 | **Remotion** | React-based composition: still images → animated video, text cards, stat cards, charts, callouts, comparisons, transitions with spring physics, word-level caption burn, TalkingHead avatar | Node.js (`npx`) + `remotion-composer/` + `node_modules` |
 | **HyperFrames** | HTML/CSS/GSAP composition: kinetic typography, product promos, launch reels, website-to-video, registry-block-driven scenes, SVG character rigs | Node.js ≥ 22 + FFmpeg + `npx` (consumed via `npx hyperframes`) |
+
+macOS Catalina note: use `python3` for all preflight commands. On Catalina
+(10.15) and older, treat HyperFrames as unavailable and present Remotion +
+FFmpeg as the local composition path unless the user has explicitly provided a
+newer supported runtime environment.
 
 `render_runtime` is **locked at proposal** (`proposal_packet.production_plan.render_runtime`) and **carried through edit_decisions unchanged**. `video_compose` routes based on this field; silent runtime swaps are forbidden. If the chosen runtime becomes unavailable at compose time, surface a structured blocker per "Escalate Blockers Explicitly" above. See `skills/core/hyperframes.md` for the Remotion-vs-HyperFrames decision matrix.
 
@@ -423,8 +428,8 @@ OpenMontage uses two layers for capability choice:
 Always inspect the registry first:
 
 ```bash
-python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.capability_catalog(), indent=2))"
-python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.provider_catalog(), indent=2))"
+python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.capability_catalog(), indent=2))"
+python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.provider_catalog(), indent=2))"
 ```
 
 For finalist tools inspect:
@@ -444,10 +449,10 @@ Do not rely on memory or old docs when the registry can answer it.
 
 ```bash
 # See all tools grouped by capability (TTS, video_generation, image_generation, etc.)
-python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.capability_catalog(), indent=2))"
+python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.capability_catalog(), indent=2))"
 
 # See all tools grouped by provider (elevenlabs, openai, ffmpeg, etc.)
-python -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.provider_catalog(), indent=2))"
+python3 -c "from tools.tool_registry import registry; import json; registry.discover(); print(json.dumps(registry.provider_catalog(), indent=2))"
 ```
 
 Key capability families to look for in the output:
