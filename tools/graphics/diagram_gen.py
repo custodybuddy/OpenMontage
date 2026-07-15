@@ -140,7 +140,7 @@ class DiagramGen(BaseTool):
         if not definition:
             return ToolResult(success=False, error="Mermaid definition required")
 
-        output_path = Path(inputs.get("output_path", "diagram.png"))
+        output_path = Path(inputs.get("output_path", "output/diagram.png"))
         output_path.parent.mkdir(parents=True, exist_ok=True)
         theme = inputs.get("theme", "dark")
 
@@ -196,7 +196,7 @@ class DiagramGen(BaseTool):
         theme = inputs.get("theme", "dark")
         width = inputs.get("width", 1200)
         height = inputs.get("height", 800)
-        output_path = Path(inputs.get("output_path", "diagram.png"))
+        output_path = Path(inputs.get("output_path", "output/diagram.png"))
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Theme colors
@@ -317,7 +317,7 @@ class DiagramGen(BaseTool):
 
         from PIL import Image, ImageDraw, ImageFont
 
-        output_path = Path(inputs.get("output_path", "diagram.png"))
+        output_path = Path(inputs.get("output_path", "output/diagram.png"))
         output_path.parent.mkdir(parents=True, exist_ok=True)
         width = inputs.get("width", 800)
 

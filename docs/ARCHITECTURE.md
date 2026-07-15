@@ -68,10 +68,12 @@ OpenMontage/
 │   └── pipelines/          # Per-pipeline stage-director skills
 │
 ├── .agents/skills/         # Layer 3: external technology skills (FFmpeg, HyperFrames, GSAP, etc.)
+├── examples/               # Non-canonical, product-specific workflow examples
+├── scripts/                # Developer and demo command-line utilities
 ├── styles/                 # Visual style playbooks (YAML) + loader
 ├── remotion-composer/      # Node.js/React — Remotion video composition renderer
 ├── tests/                  # Contract tests, QA integration tests, eval harness
-├── docs/                   # Best-practices guides, session handoffs, audits
+├── docs/                   # Architecture, provider, and contributor documentation
 └── config.yaml             # Global runtime configuration
 ```
 

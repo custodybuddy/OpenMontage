@@ -8,8 +8,8 @@ These render pre-built compositions using only Remotion components — animated 
 
 ```bash
 make demo                         # Render all three demos
-./render-demo.sh world-in-numbers # Render one specific demo
-./render-demo.sh --list           # See all available demos
+scripts/demos/render-demo.sh world-in-numbers # Render one specific demo
+scripts/demos/render-demo.sh --list           # See all available demos
 ```
 
 | Demo | Duration | What It Shows |

@@ -81,6 +81,8 @@ node_modules/
 
 # Remotion build output and copied project assets (regenerable at render time)
 remotion-composer/out/
+# One-off props belong in project workspaces or public/demo-props, not the composer root.
+remotion-composer/*_props.json
 # Project-local bespoke ("atelier") compositions — hand-authored per video,
 # throwaway and regenerable. Keeps the shared src/ free of one-off scenes.
 remotion-composer/projects/

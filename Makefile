@@ -69,10 +69,10 @@ demo:
 	@echo "==> Rendering zero-key demo videos (no API keys needed)..."
 	@echo "    These use only Remotion components — animated charts, text, data viz."
 	@echo ""
-	$(PYTHON) render_demo.py
+	$(PYTHON) scripts/demos/render_demo.py
 
 demo-list:
-	@$(PYTHON) render_demo.py --list
+	@$(PYTHON) scripts/demos/render_demo.py --list
 
 lint:
 	$(PYTHON) -m py_compile tools/base_tool.py

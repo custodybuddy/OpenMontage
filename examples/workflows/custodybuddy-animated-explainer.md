@@ -1,8 +1,6 @@
-# Workflow 03: CustodyBuddy Animated Explainer Video
+# CustodyBuddy Animated Explainer Workflow
 
-Use this workflow to create calm, legally cautious CustodyBuddy animated explainers for separated or divorced parents. It is based on the proven 45-60 second vertical structure from:
-
-`projects/custodybuddy-screenshots-not-enough/artifacts/explainer_pipeline_output.md`
+Use this self-contained example workflow to create calm, legally cautious CustodyBuddy animated explainers for separated or divorced parents. It demonstrates a reusable 45-60 second vertical structure without depending on generated project artifacts.
 
 ## Purpose
 
