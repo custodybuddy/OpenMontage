@@ -1,0 +1,157 @@
+{
+  "version": "1.0",
+  "project_id": "i-built-a-simple-website-with-ai-to-make-money-with-adsense",
+  "decisions": [
+    {
+      "decision_id": "d-001",
+      "stage": "idea",
+      "category": "pipeline_selection",
+      "subject": "Production workflow for the supplied tutorial footage",
+      "options_considered": [
+        {
+          "option_id": "screen-demo",
+          "label": "Screen Demo \u2014 real capture",
+          "score": 0.97,
+          "reason": "The source is a narrated browser walkthrough whose instructional value depends on readable UI actions and guided attention."
+        },
+        {
+          "option_id": "clip-factory",
+          "label": "Clip Factory",
+          "score": 0.61,
+          "reason": "Suitable later for extracting individual social clips, but it does not define the requested reusable tutorial template.",
+          "rejected_because": "The primary deliverable is a template for a coherent screen-demo edit, not a batch of independent clips."
+        },
+        {
+          "option_id": "talking-head",
+          "label": "Talking Head",
+          "score": 0.12,
+          "reason": "The source has no on-camera presenter; the browser UI is the hero surface.",
+          "rejected_because": "The footage does not fit a speaker-led composition."
+        }
+      ],
+      "selected": "screen-demo",
+      "reason": "A real-capture screen-demo workflow preserves the browser actions and supports the source-derived overlay template.",
+      "user_visible": true,
+      "user_approved": false,
+      "confidence": 0.97
+    },
+    {
+      "decision_id": "d-002",
+      "stage": "idea",
+      "category": "render_runtime_selection",
+      "subject": "Runtime for a later implementation of the template",
+      "options_considered": [
+        {
+          "option_id": "ffmpeg",
+          "label": "FFmpeg",
+          "score": 0.9,
+          "reason": "Available locally and appropriate for trimming source footage, adding basic subtitles, and rendering a landscape master."
+        },
+        {
+          "option_id": "remotion",
+          "label": "Remotion",
+          "score": 0.45,
+          "reason": "Would add more flexible animated overlays and word-level caption handling.",
+          "rejected_because": "Runtime not available on this machine; the project's node dependencies are not installed."
+        },
+        {
+          "option_id": "hyperframes",
+          "label": "HyperFrames",
+          "score": 0.2,
+          "reason": "Would suit a custom HTML overlay shell.",
+          "rejected_because": "Runtime not available on this machine; macOS Catalina is below its supported runtime floor and npx is unavailable."
+        }
+      ],
+      "selected": "ffmpeg",
+      "reason": "FFmpeg is the only currently available render path. This selection applies only if the template proceeds to a basic source-led render; no runtime has been invoked yet.",
+      "user_visible": true,
+      "user_approved": false,
+      "confidence": 0.94
+    },
+    {
+      "decision_id": "d-003",
+      "stage": "idea",
+      "category": "composition_mode",
+      "subject": "How the reusable tutorial template should be authored",
+      "options_considered": [
+        {
+          "option_id": "templated",
+          "label": "Templated",
+          "score": 0.94,
+          "reason": "The requested deliverable is a reusable edit system with repeatable browser framing, focus states, and caption rules."
+        },
+        {
+          "option_id": "atelier",
+          "label": "Atelier",
+          "score": 0.48,
+          "reason": "A hand-authored composition would be more distinctive for a one-off hero launch.",
+          "rejected_because": "This project asks for reusable template guidance rather than a bespoke marketing film."
+        }
+      ],
+      "selected": "templated",
+      "reason": "Repeatable tutorial packaging is the explicit goal, and no full render has been commissioned yet.",
+      "user_visible": true,
+      "user_approved": false,
+      "confidence": 0.96
+    },
+    {
+      "decision_id": "d-004",
+      "stage": "idea",
+      "category": "playbook_override",
+      "subject": "Visual shell for the template",
+      "options_considered": [
+        {
+          "option_id": "source-derived-shell",
+          "label": "Source-derived dark browser stage",
+          "score": 0.95,
+          "reason": "Representative frames consistently show a dark presentation field, blue-violet glows, and a centered rounded browser window."
+        },
+        {
+          "option_id": "clean-professional",
+          "label": "Clean Professional",
+          "score": 0.68,
+          "reason": "It offers clear typography and accessibility rules for educational demos.",
+          "rejected_because": "Its light-first visual language does not match the observed source packaging."
+        },
+        {
+          "option_id": "flat-motion-graphics",
+          "label": "Flat Motion Graphics",
+          "score": 0.52,
+          "reason": "It would make quick social overlays energetic.",
+          "rejected_because": "It risks competing with small browser UI and over-stylizing a practical walkthrough."
+        }
+      ],
+      "selected": "source-derived-shell",
+      "reason": "The template should extend the recognizable browser-stage treatment already present in the footage while keeping labels readable at 720p.",
+      "user_visible": true,
+      "user_approved": false,
+      "confidence": 0.91
+    },
+    {
+      "decision_id": "d-005",
+      "stage": "idea",
+      "category": "music_source",
+      "subject": "Background music policy",
+      "options_considered": [
+        {
+          "option_id": "none",
+          "label": "No background music",
+          "score": 0.9,
+          "reason": "The source is an instructional walkthrough with continuous narration, and no library or music-generation source is configured."
+        },
+        {
+          "option_id": "user-track",
+          "label": "User-supplied low-key bed",
+          "score": 0.62,
+          "reason": "Could add polish if the user later supplies a cleared, unobtrusive track.",
+          "rejected_because": "No music library track has been provided."
+        }
+      ],
+      "selected": "none",
+      "reason": "Clarity of narration and interface actions has priority; music can be added later only with explicit approval.",
+      "user_visible": true,
+      "user_approved": false,
+      "confidence": 0.93
+    }
+  ]
+}
